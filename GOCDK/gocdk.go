@@ -18,7 +18,12 @@ func NewGocdkStack(scope constructs.Construct, id string, props *GocdkStackProps
 	}
 	stack := awscdk.NewStack(scope, &id, &sprops)
 
-	
+	awslambda.NewFunction(stack, jsii.String("MyLambdaFunction"), &awslambda.FunctionProps{
+		Runtime: awslambda.Runtime_PROVIDED_AL2023(),
+		Code:    awslambda.AssetCode_FromAsset(jsii.String("lambda/function.zip"), nil),
+		Handler: jsii.String("index.handler"),
+	})
+
 	return stack
 }
 
@@ -48,8 +53,8 @@ func env() *awscdk.Environment {
 	// the stack to. This is the recommendation for production stacks.
 	//---------------------------------------------------------------------------
 	return &awscdk.Environment{
-	 Account: jsii.String("635564819846"),
-	 Region:  jsii.String("eu-west-4"),
+		Account: jsii.String("635564819846"),
+		Region:  jsii.String("eu-west-4"),
 	}
 
 	// Uncomment to specialize this stack for the AWS Account and Region that are

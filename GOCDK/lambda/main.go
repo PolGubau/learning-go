@@ -13,9 +13,10 @@ type MyEvent struct {
 // take payload
 func HandleRequest(event MyEvent) (string, error) {
 	if event.Username == "" {
-		return "",fmt.Errorf("username is empty")
+		return "", fmt.Errorf("username is empty")
 	}
-	return fmt.Sprintf("Successfully processed - %s", event.Username),nil
+
+	return fmt.Sprintf("Successfully processed - %s", event.Username), nil
 
 }
 
